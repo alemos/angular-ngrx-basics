@@ -1,0 +1,11 @@
+:host {
+  .media-list-container {
+    margin-bottom: 50px;
+
+    .media-cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+}

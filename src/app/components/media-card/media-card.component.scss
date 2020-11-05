@@ -1,0 +1,15 @@
+:host {
+  .media-card-container {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    height: 250px;
+    border: 1px lightgrey solid;
+    margin: 5px;
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}

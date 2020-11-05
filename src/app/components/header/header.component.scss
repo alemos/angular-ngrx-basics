@@ -1,0 +1,14 @@
+:host {
+  .header-container {
+    @media (max-width: 600px) {
+      padding: 0;
+    }
+    border-bottom: 1px solid lightgray;
+    width: 100vw;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+}

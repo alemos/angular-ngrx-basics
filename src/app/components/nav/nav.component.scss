@@ -1,0 +1,22 @@
+@import "variables";
+
+:host {
+  .activated-link {
+    font-weight: bold;
+    border: 2px solid $activated-link-border;
+  }
+  .nav-container {
+    @media (max-width: 600px) {
+      button {
+        width: 50%;
+      }
+    }
+    button {
+      width: 145px;
+    }
+    height: 35px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+}

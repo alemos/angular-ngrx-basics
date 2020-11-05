@@ -1,0 +1,11 @@
+<div class="media-details-container">
+  <h3>Media details</h3>
+  <button (click)="back()">Back</button>
+
+  <div class="details-info">
+    <label class="title">{{ details?.media?.title }}</label>
+    <label class="overview">{{ details?.media?.overview }}</label>
+  </div>
+
+  <img [src]="img_url" alt="" />
+</div>

@@ -1,0 +1,21 @@
+<div
+  class="media-card-container"
+  [routerLink]="['/media-details', mediaDetail.id]"
+  routerLinkActive="router-link-active"
+>
+  <ng-container *ngIf="mediaType === 'movie'">
+    <img [src]="img_url" alt="" />
+    <div *ngIf="!img_url">
+      <label>No Image Data</label>
+      <label>{{ mediaDetail?.title }}</label>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="mediaType === 'tv'">
+    <img *ngIf="img_url" [src]="img_url" alt="" />
+    <div *ngIf="!img_url">
+      <label>No Image Data</label>
+      <label>{{ mediaDetail?.name }}</label>
+    </div>
+  </ng-container>
+</div>
