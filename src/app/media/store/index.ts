@@ -3,15 +3,11 @@ import * as fromMedia from './reducers';
 
 export const mediaStateFeatureKey = 'media';
 
-//////////////////// SELECTORS ////////////////////
-
-// top rated movies
 export const selectMedia = createFeatureSelector<fromMedia.IMediaState>(
   mediaStateFeatureKey
 );
 
 export const selectTopRatedMoviesState = createSelector(
-  // returns Observable, bind with async pipe on template
   selectMedia,
   (state: any) => state.topRatedMovies.media
 );
