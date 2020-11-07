@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { MediaModule } from './media/media.module';
@@ -12,6 +12,7 @@ import { reducers } from './store/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthInterceptor } from './auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AppConfig, _cfgInitializerFn } from './app.config';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,6 +33,12 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
   bootstrap: [AppComponent],
   exports: [RouterModule],
   providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: _cfgInitializerFn,
+      multi: true,
+      deps: [AppConfig],
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

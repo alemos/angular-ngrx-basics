@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AppConfig } from 'src/app/app.config';
 
 @Component({
   selector: 'media-card',
@@ -10,11 +11,9 @@ export class MediaCardComponent implements OnInit {
   @Input('mediaType') mediaType;
   base_url: string;
   img_url: string;
-  cfg: any;
 
-  constructor() {
-    this.cfg = JSON.parse(localStorage.getItem('config'));
-    this.base_url = `${this.cfg && this.cfg.images?.base_url}w185`;
+  constructor(private _c: AppConfig) {
+    this.base_url = `${this._c.config.images?.base_url}w185`;
   }
 
   ngOnInit() {}

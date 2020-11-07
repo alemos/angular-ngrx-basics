@@ -13,22 +13,6 @@ export class MediaEffects {
     private actions$: Actions
   ) {}
 
-  configuration$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(MediaActions.setConfig),
-      mergeMap(() =>
-        this.mediaService
-          .getConfiguration()
-          .pipe(map((config: any) => MediaActions.configSuccess({ config })))
-      ),
-      catchError((error) => {
-        const errorMsg: string = 'Error fetching config data';
-        console.error(errorMsg, error);
-        return of(MediaActions.configFailure({ errorMsg }));
-      })
-    )
-  );
-
   topRatedMovies$ = createEffect(() =>
     this.actions$.pipe(
       ofType(MediaActions.getTopRatedMovies),

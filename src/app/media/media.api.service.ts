@@ -8,15 +8,6 @@ import { app_consts as config } from '../app.const';
 export class MediaApiService {
   constructor(private http: HttpClient) {}
 
-  getConfiguration(): Observable<any> {
-    const reqUrl: string = `${config.api_url}/configuration`;
-
-    return this.http.get(reqUrl).pipe(
-      map((response) => response),
-      catchError((error) => throwError(error))
-    );
-  }
-
   getTopRatedMovies(): Observable<any> {
     const reqUrl: string = `${config.api_url}/movie/top_rated`;
 

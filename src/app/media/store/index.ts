@@ -22,11 +22,6 @@ export const selectSearchState = createSelector(
   (state: any) => state.search.media
 );
 
-export const selectConfigState = createSelector(
-  selectMedia,
-  (state: any) => state.config
-);
-
 export const selectDetailsState = createSelector(
   selectMedia,
   (state: any) => state.details

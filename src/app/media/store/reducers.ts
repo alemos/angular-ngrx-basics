@@ -5,11 +5,9 @@ export interface IMediaState {
   topRatedTv: ITopRatedTvState;
   search: ISearchState;
   topRatedMovies: ITopRatedMoviesState;
-  config: IConfigState;
   details: IDetailsState;
 }
 
-// DETAILS REDUCER
 export interface IDetailsState {
   id: string;
   data: any;
@@ -53,31 +51,6 @@ const _detailsReducer = createReducer(
   }))
 );
 
-// CONFIG REDUCER
-export interface IConfigState {
-  config: any;
-}
-const initialConfigState: IConfigState = {
-  config: null,
-};
-const _configReducer = createReducer(
-  initialConfigState,
-  on(MediaActions.setConfig, (state, action) => ({
-    ...state,
-  })),
-
-  on(MediaActions.configSuccess, (state, action) => ({
-    ...state,
-    config: action.config,
-  })),
-
-  on(MediaActions.configFailure, (state, action) => ({
-    ...state,
-    error: action.errorMsg,
-  }))
-);
-
-// SEARCH REDUCER
 export interface ISearchState {
   query: string;
 }
@@ -102,11 +75,6 @@ const _searchReducer = createReducer(
   }))
 );
 
-export function searchReducer(state: ISearchState, action: Action) {
-  return _searchReducer(state, action);
-}
-
-// TOP RATED MOVIES REDUCER
 export interface ITopRatedMoviesState {
   media: Object;
 }
@@ -130,7 +98,6 @@ const _topRatedMoviesReducer = createReducer(
   }))
 );
 
-// TOP RATED TV REDUCER
 export interface ITopRatedTvState {
   media: Object;
 }
@@ -157,9 +124,8 @@ const _topRatedTvReducer = createReducer(
 export function mediaReducer(state: any, action: Action) {
   return combineReducers({
     topRatedTv: _topRatedTvReducer,
-    search: searchReducer,
+    search: _searchReducer,
     topRatedMovies: _topRatedMoviesReducer,
-    config: _configReducer,
     details: _detailsReducer,
   })(state, action);
 }

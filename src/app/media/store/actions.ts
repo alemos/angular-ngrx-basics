@@ -1,19 +1,5 @@
 import { createAction, props } from '@ngrx/store';
 
-// Configuration
-export const setConfig = createAction('[Set Config] Config');
-
-export const configSuccess = createAction(
-  '[Media/API] Config Success',
-  props<{ config: any }>()
-);
-
-export const configFailure = createAction(
-  '[Media/API] Config Failure',
-  props<{ errorMsg: string }>()
-);
-
-// Search
 export const setSearchQuery = createAction(
   '[Set Search Query] Search Media',
   props<{ query: string }>()
@@ -44,7 +30,6 @@ export const getTopRatedMoviesFailure = createAction(
   props<{ errorMsg: string }>()
 );
 
-// Top rated tv shows
 export const getTopRatedTv = createAction('[Media/API] get top rated tv shows');
 
 export const getTopRatedTvSuccess = createAction(
@@ -57,7 +42,6 @@ export const getTopRatedTvFailure = createAction(
   props<{ errorMsg: string }>()
 );
 
-// Media Details
 export const setMediaDetails = createAction(
   '[Set Media Details] Media Details',
   props<{ id: any }>()

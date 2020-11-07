@@ -7,6 +7,7 @@ import * as MediaActions from '../store/actions';
 import * as fromApp from '../../store/reducers';
 import { Observable, Subject } from 'rxjs';
 import * as fromMediaStore from '../store/index';
+import { AppConfig } from 'src/app/app.config';
 
 @Component({
   selector: 'media-details',
@@ -19,19 +20,18 @@ export class MediaDetailsComponent implements OnInit, OnDestroy {
   detailsData$: Observable<any>;
   detailsVideoData$: Observable<any>;
   details: any;
-  cfg: any;
   base_url: string;
   img_url: string;
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
-    private store: Store<fromApp.AppState>
+    private store: Store<fromApp.AppState>,
+    private _c: AppConfig
   ) {}
 
   ngOnInit() {
-    this.cfg = JSON.parse(localStorage.getItem('config'));
-    this.base_url = `${this.cfg && this.cfg.images?.base_url}w185`;
+    this.base_url = `${this._c.config.images?.base_url}w185`;
 
     this.route.params.subscribe((p) => {
       if (p && p.id) {
@@ -44,14 +44,12 @@ export class MediaDetailsComponent implements OnInit, OnDestroy {
     this.detailsData$ = this.store.pipe(
       select(fromMediaStore.selectDetailsState)
     );
-    this.store.subscribe((s) => {
-      this.details = s.media?.details;
-    });
 
     this.detailsData$
       .pipe(takeUntil(this.observablesDispose$))
       .subscribe((data: any) => {
-        this.img_url = `${this.base_url}${data?.media?.poster_path}`;
+        this.details = data;
+        this.img_url = `${this.base_url}${data.media?.poster_path}`;
       });
   }
 
