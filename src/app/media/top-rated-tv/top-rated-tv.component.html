@@ -1,2 +1,18 @@
 <h3>Top rated TV</h3>
-<app-media-list [mediaRes]="topRatedTv" [mediaType]="'tv'"></app-media-list>
+
+<ng-container
+  *ngIf="(mediaData$ | async)?.loading; then loader; else content"
+></ng-container>
+
+<ng-template #loader> <label>Loading...</label> </ng-template>
+
+<ng-template #content>
+  <app-media-list
+    [mediaRes]="(mediaData$ | async)?.media?.results"
+    [mediaType]="'movie'"
+  ></app-media-list>
+
+  <label>
+    {{ (mediaData$ | async)?.error }}
+  </label>
+</ng-template>

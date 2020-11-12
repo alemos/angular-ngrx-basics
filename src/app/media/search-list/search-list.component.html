@@ -1,2 +1,27 @@
 <h3>Search Results</h3>
-<app-media-list [mediaRes]="searchData" [mediaType]="'movie'"></app-media-list>
+
+<ng-container
+  *ngIf="(searchData$ | async)?.loading; then loader; else content"
+></ng-container>
+
+<ng-template #loader> <label>Loading...</label> </ng-template>
+
+<ng-template #content>
+  <app-media-list
+    [mediaRes]="(searchData$ | async)?.media?.results"
+    [mediaType]="'movie'"
+  ></app-media-list>
+
+  <label>
+    {{ (searchData$ | async)?.error }}
+  </label>
+
+  <ng-container
+    *ngIf="
+      !(searchData$ | async)?.loading &&
+      (searchData$ | async)?.media?.results.length < 1
+    "
+  >
+    <label>No media found</label>
+  </ng-container>
+</ng-template>

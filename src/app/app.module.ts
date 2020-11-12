@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { ApplicationRef, APP_INITIALIZER, NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { MediaModule } from './media/media.module';
@@ -13,6 +13,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthInterceptor } from './auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppConfig, _cfgInitializerFn } from './app.config';
+import { ConfigFailoverComponent } from './components/config-failover/config-failover.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +31,6 @@ import { AppConfig, _cfgInitializerFn } from './app.config';
     EffectsModule.forRoot(),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
-  bootstrap: [AppComponent],
   exports: [RouterModule],
   providers: [
     {
@@ -46,4 +46,13 @@ import { AppConfig, _cfgInitializerFn } from './app.config';
     },
   ],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private _c: AppConfig) {}
+  ngDoBootstrap(app: ApplicationRef) {
+    const component: any = this._c.config
+      ? AppComponent
+      : ConfigFailoverComponent;
+
+    app.bootstrap(component);
+  }
+}

@@ -58,7 +58,7 @@ export const mediaDetailsFailure = createAction(
 );
 
 export const setMediaDetailsVideo = createAction(
-  '[Set Media Details] Media Details Video',
+  '[Media/API] Media Details Video',
   props<{ id: any }>()
 );
 

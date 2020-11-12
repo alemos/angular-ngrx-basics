@@ -9,17 +9,17 @@ export const selectMedia = createFeatureSelector<fromMedia.IMediaState>(
 
 export const selectTopRatedMoviesState = createSelector(
   selectMedia,
-  (state: any) => state.topRatedMovies.media
+  (state: any) => state.topRatedMovies
 );
 
 export const selectTopRatedTvState = createSelector(
   selectMedia,
-  (state: any) => state.topRatedTv.media
+  (state: any) => state.topRatedTv
 );
 
 export const selectSearchState = createSelector(
   selectMedia,
-  (state: any) => state.search.media
+  (state: any) => state.search
 );
 
 export const selectDetailsState = createSelector(

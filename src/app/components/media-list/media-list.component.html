@@ -1,6 +1,6 @@
 <div class="media-list-container">
-  <div class="media-cards-container" *ngIf="showContent">
-    <ng-container *ngFor="let item of mediaList">
+  <div class="media-cards-container">
+    <ng-container *ngFor="let item of mediaRes">
       <media-card [mediaDetail]="item" [mediaType]="mediaType"></media-card>
     </ng-container>
   </div>

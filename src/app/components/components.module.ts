@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MediaCardComponent } from './media-card/media-card.component';
+import { ConfigFailoverComponent } from './config-failover/config-failover.component';
 
 @NgModule({
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
@@ -18,6 +19,7 @@ import { MediaCardComponent } from './media-card/media-card.component';
     SearchComponent,
     NavComponent,
     MediaCardComponent,
+    ConfigFailoverComponent,
   ],
   exports: [
     PageNotFoundComponent,
@@ -26,6 +28,7 @@ import { MediaCardComponent } from './media-card/media-card.component';
     SearchComponent,
     NavComponent,
     MediaCardComponent,
+    ConfigFailoverComponent,
   ],
 })
 export class ComponentsModule {}

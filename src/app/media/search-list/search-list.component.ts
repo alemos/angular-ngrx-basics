@@ -1,8 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import * as fromApp from '../../store/reducers';
 import * as fromMediaStore from '../store/index';
 
@@ -11,27 +9,10 @@ import * as fromMediaStore from '../store/index';
   templateUrl: './search-list.component.html',
   styleUrls: ['./search-list.component.scss'],
 })
-export class SearchListComponent implements OnInit, OnDestroy {
-  observablesDispose$: Subject<void> = new Subject();
-  searchData$: Observable<any>;
-  searchData: any;
+export class SearchListComponent {
+  searchData$: Observable<any> = this.store.pipe(
+    select(fromMediaStore.selectSearchState)
+  );
 
-  constructor(private store: Store<fromApp.AppState>, private router: Router) {}
-
-  ngOnInit() {
-    this.searchData$ = this.store.pipe(
-      select(fromMediaStore.selectSearchState)
-    );
-
-    this.searchData$
-      .pipe(takeUntil(this.observablesDispose$))
-      .subscribe((data: any) => {
-        this.searchData = data;
-      });
-  }
-
-  ngOnDestroy() {
-    this.observablesDispose$.next();
-    this.observablesDispose$.complete();
-  }
+  constructor(private store: Store<fromApp.AppState>) {}
 }

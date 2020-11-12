@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { app_consts as config } from './app.const';
+import { app_consts } from './app.const';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -14,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token = config.api_token;
+    const token = app_consts.api_token;
     if (token) {
       const cloned = req.clone({
         headers: req.headers.set('Authorization', 'Bearer ' + token),

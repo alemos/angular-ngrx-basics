@@ -1,7 +1,6 @@
 <div
   class="media-card-container"
   [routerLink]="['/media-details', mediaDetail.id]"
-  routerLinkActive="router-link-active"
 >
   <ng-container *ngIf="mediaType === 'movie'">
     <img [src]="img_url" alt="" />

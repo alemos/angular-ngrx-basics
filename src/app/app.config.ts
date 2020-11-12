@@ -17,7 +17,7 @@ export class AppConfig implements IAppConfig {
     try {
       this.config = await this.appService.getConfiguration();
     } catch (error) {
-      console.error('Error geting configuration');
+      console.error('Error geting configuration', error);
     }
   }
 }

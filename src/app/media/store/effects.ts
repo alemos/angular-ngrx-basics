@@ -17,19 +17,17 @@ export class MediaEffects {
     this.actions$.pipe(
       ofType(MediaActions.getTopRatedMovies),
       mergeMap(() =>
-        this.mediaService
-          .getTopRatedMovies()
-          .pipe(
-            map((media: ITopRatedMedia) =>
-              MediaActions.getTopRatedMoviesSuccess({ media })
-            )
-          )
-      ),
-      catchError((error) => {
-        const errorMsg: string = 'Error fetching Top rated movies';
-        console.error(errorMsg, error);
-        return of(MediaActions.getTopRatedMoviesFailure({ errorMsg }));
-      })
+        this.mediaService.getTopRatedMovies().pipe(
+          map((media: ITopRatedMedia) =>
+            MediaActions.getTopRatedMoviesSuccess({ media })
+          ),
+          catchError((error) => {
+            const errorMsg: string = 'Error fetching Top rated movies';
+            console.error(errorMsg, error);
+            return of(MediaActions.getTopRatedMoviesFailure({ errorMsg }));
+          })
+        )
+      )
     )
   );
 
@@ -37,19 +35,17 @@ export class MediaEffects {
     this.actions$.pipe(
       ofType(MediaActions.getTopRatedTv),
       mergeMap(() =>
-        this.mediaService
-          .getTopRatedTv()
-          .pipe(
-            map((media: ITopRatedMedia) =>
-              MediaActions.getTopRatedTvSuccess({ media })
-            )
-          )
-      ),
-      catchError((error) => {
-        const errorMsg: string = 'Error fetching Top rated movies';
-        console.error(errorMsg, error);
-        return of(MediaActions.getTopRatedTvFailure({ errorMsg }));
-      })
+        this.mediaService.getTopRatedTv().pipe(
+          map((media: ITopRatedMedia) =>
+            MediaActions.getTopRatedTvSuccess({ media })
+          ),
+          catchError((error) => {
+            const errorMsg: string = 'Error fetching Top rated movies';
+            console.error(errorMsg, error);
+            return of(MediaActions.getTopRatedTvFailure({ errorMsg }));
+          })
+        )
+      )
     )
   );
 
@@ -57,19 +53,15 @@ export class MediaEffects {
     this.actions$.pipe(
       ofType(MediaActions.setSearchQuery),
       mergeMap((actions) =>
-        this.mediaService
-          .searchMedia(actions.query)
-          .pipe(
-            map((media: ITopRatedMedia) =>
-              MediaActions.searchSuccess({ media })
-            )
-          )
-      ),
-      catchError((error) => {
-        const errorMsg: string = 'Error fetching search data';
-        console.error(errorMsg, error);
-        return of(MediaActions.searchFailure({ errorMsg }));
-      })
+        this.mediaService.searchMedia(actions.query).pipe(
+          map((media: ITopRatedMedia) => MediaActions.searchSuccess({ media })),
+          catchError((error) => {
+            const errorMsg: string = 'Error fetching search data';
+            console.error(errorMsg, error);
+            return of(MediaActions.searchFailure({ errorMsg }));
+          })
+        )
+      )
     )
   );
 
@@ -77,15 +69,17 @@ export class MediaEffects {
     this.actions$.pipe(
       ofType(MediaActions.setMediaDetails),
       mergeMap((actions) =>
-        this.mediaService
-          .getMediaDetail(actions.id)
-          .pipe(map((data: any) => MediaActions.mediaDetailsSuccess({ data })))
-      ),
-      catchError((error) => {
-        const errorMsg: string = 'Error fetching Details';
-        console.error(errorMsg, error);
-        return of(MediaActions.mediaDetailsFailure({ errorMsg }));
-      })
+        this.mediaService.getMediaDetail(actions.id).pipe(
+          map(
+            (data: any) => MediaActions.mediaDetailsSuccess({ data }),
+            catchError((error) => {
+              const errorMsg: string = 'Error fetching Details';
+              console.error(errorMsg, error);
+              return of(MediaActions.mediaDetailsFailure({ errorMsg }));
+            })
+          )
+        )
+      )
     )
   );
 
@@ -93,19 +87,15 @@ export class MediaEffects {
     this.actions$.pipe(
       ofType(MediaActions.setMediaDetailsVideo),
       mergeMap((actions) =>
-        this.mediaService
-          .getMediaVideo(actions.id)
-          .pipe(
-            map((video: any) =>
-              MediaActions.mediaDetailsVideoSuccess({ video })
-            )
-          )
-      ),
-      catchError((error) => {
-        const errorMsg: string = 'Error fetching Details Video';
-        console.error(errorMsg, error);
-        return of(MediaActions.mediaDetailsVideoFailure({ errorMsg }));
-      })
+        this.mediaService.getMediaVideo(actions.id).pipe(
+          map((video: any) => MediaActions.mediaDetailsVideoSuccess({ video })),
+          catchError((error) => {
+            const errorMsg: string = 'Error fetching Details Video';
+            console.error(errorMsg, error);
+            return of(MediaActions.mediaDetailsVideoFailure({ errorMsg }));
+          })
+        )
+      )
     )
   );
 }

@@ -2,10 +2,20 @@
   <h3>Media details</h3>
   <button (click)="back()">Back</button>
 
-  <div class="details-info">
-    <label class="title">{{ details?.media?.title }}</label>
-    <label class="overview">{{ details?.media?.overview }}</label>
-  </div>
+  <ng-container
+    *ngIf="(detailsData$ | async)?.loading; then loader; else content"
+  ></ng-container>
 
-  <img [src]="img_url" alt="" />
+  <ng-template #loader> <label>Loading...</label> </ng-template>
+
+  <ng-template #content>
+    <div class="details-info">
+      <label class="title">{{ (detailsData$ | async)?.media?.title }}</label>
+      <label class="overview">{{
+        (detailsData$ | async)?.media?.overview
+      }}</label>
+    </div>
+
+    <img [src]="base_url + (detailsData$ | async)?.media?.poster_path" alt="" />
+  </ng-template>
 </div>
